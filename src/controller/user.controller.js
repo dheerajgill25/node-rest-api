@@ -70,6 +70,44 @@ class UserController {
         res.status(500);
       });
   }
+  static addUserMark(req, res) {
+    userService
+      .addSubjectMark(req.body)
+      .then((response) => {
+        if (response.error) {
+          res.status(400).send(response.data);
+        } else {
+          res.status(200).send(response.data);
+        }
+      })
+      .catch((err) => {
+        res.status(500);
+      });
+  }
+  static updateUserMark(req, res) {
+    userService
+      .updateSubjectMark(req.params.id, req.body)
+      .then((response) => {
+        if (response.error) {
+          res.status(400).send(response.data);
+        } else {
+          res.status(200).send(response.data);
+        }
+      })
+      .catch((err) => {
+        res.status(500);
+      });
+  }
+  static getUserMark(req, res) {
+    userService
+      .getUserMark(req.params.userId)
+      .then((response) => {
+        res.status(400).send(response);
+      })
+      .catch((err) => {
+        res.status(500);
+      });
+  }
 }
 
 module.exports = UserController;
